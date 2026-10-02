@@ -54,7 +54,7 @@ function Stat({ label, value, icon: I, tone = "info", delta }: { label: string; 
   return (
     <Card className="p-5">
       <div className="flex items-start justify-between"><p className="text-xs font-semibold text-muted-foreground">{label}</p><IconTile icon={I} tone={tone} /></div>
-      <p className="mt-2 text-2xl font-extrabold text-navy tnum">{value}</p>
+      <p className="mt-2 text-xl font-extrabold text-navy tnum 2xl:text-2xl">{value}</p>
       {delta && <p className="mt-1 text-xs text-muted-foreground">{delta}</p>}
     </Card>
   );
