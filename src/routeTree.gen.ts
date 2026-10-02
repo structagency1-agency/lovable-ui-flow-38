@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminScreenRouteImport } from './routes/admin.$screen'
+import { Route as AgentScreenRouteImport } from './routes/agent.$screen'
+import { Route as AppScreenRouteImport } from './routes/app.$screen'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminScreenRoute = AdminScreenRouteImport.update({
+  id: '/admin/$screen',
+  path: '/admin/$screen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgentScreenRoute = AgentScreenRouteImport.update({
+  id: '/agent/$screen',
+  path: '/agent/$screen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppScreenRoute = AppScreenRouteImport.update({
+  id: '/app/$screen',
+  path: '/app/$screen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin/$screen': typeof AdminScreenRoute
+  '/agent/$screen': typeof AgentScreenRoute
+  '/app/$screen': typeof AppScreenRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin/$screen': typeof AdminScreenRoute
+  '/agent/$screen': typeof AgentScreenRoute
+  '/app/$screen': typeof AppScreenRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin/$screen': typeof AdminScreenRoute
+  '/agent/$screen': typeof AgentScreenRoute
+  '/app/$screen': typeof AppScreenRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/admin/$screen' | '/agent/$screen' | '/app/$screen'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/admin/$screen' | '/agent/$screen' | '/app/$screen'
+  id: '__root__' | '/' | '/admin/$screen' | '/agent/$screen' | '/app/$screen'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminScreenRoute: typeof AdminScreenRoute
+  AgentScreenRoute: typeof AgentScreenRoute
+  AppScreenRoute: typeof AppScreenRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/$screen': {
+      id: '/admin/$screen'
+      path: '/admin/$screen'
+      fullPath: '/admin/$screen'
+      preLoaderRoute: typeof AdminScreenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agent/$screen': {
+      id: '/agent/$screen'
+      path: '/agent/$screen'
+      fullPath: '/agent/$screen'
+      preLoaderRoute: typeof AgentScreenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/$screen': {
+      id: '/app/$screen'
+      path: '/app/$screen'
+      fullPath: '/app/$screen'
+      preLoaderRoute: typeof AppScreenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminScreenRoute: AdminScreenRoute,
+  AgentScreenRoute: AgentScreenRoute,
+  AppScreenRoute: AppScreenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
